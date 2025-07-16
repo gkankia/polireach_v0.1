@@ -113,7 +113,7 @@ function generateIsochrone(lngLat) {
         map.once("idle", function () {
 
             // Fetch voter data
-            fetch('https://raw.githubusercontent.com/axis-Z/urbanyxv1/main/data/elections_2024.geojson')
+            fetch('https://raw.githubusercontent.com/gkankia/polireach_v0.1/main/data/elections_2024.geojson')
             .then(function(response) {
                 return response.json();
             })
