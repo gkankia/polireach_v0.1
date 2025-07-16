@@ -105,7 +105,7 @@ function generateIsochrone(lngLat) {
 
             bearing: 0,
             pitch: 55,
-            maxZoom: 20, // Ensure enough zoom to show buildings
+            maxZoom: 22, // Ensure enough zoom to show buildings
             minZoom: 16.5  // Optional: prevent zooming out too much 
         });
 
