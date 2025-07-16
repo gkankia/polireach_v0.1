@@ -340,7 +340,7 @@ function generateIsochrone(lngLat) {
                             // ყლელო
                             "</p>" +
                             "<p style='display: flex; align-items: center; gap: 5px;'>" +
-                            "<img class='img-text' src='/Users/giorgikankia/Documents/GitHub/PoliReach/img/ყლელო.png' alt='lelo' style='width: 25%; height: auto;'>" +
+                            "<img class='img-text' src='https://raw.githubusercontent.com/gkankia/polireach_v0.1/refs/heads/main/img/%E1%83%92%E1%83%98%E1%83%A0%E1%83%A9%E1%83%98.png?token=GHSAT0AAAAAADGPCCYIDDN2Z446AY7ICX2C2DX5BHQ' alt='lelo' style='width: 25%; height: auto;'>" +
                             "<span>" +
                                 "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2024" + 
                                 "<span class='innerhtml' style='color:#969696; font-size: 15px;'> " + lelo9 + " (" + lelo9Percentage + " %)</span><br>" +
