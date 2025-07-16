@@ -332,8 +332,8 @@ function generateIsochrone(lngLat) {
                             "<span>" +
                                 "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2024" + 
                                 "<span class='innerhtml' style='color:#969696; font-size: 15px;'> " + koalicia4 + " (" + koalicia4Percentage + " %)</span><br>" +
-                                "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2025" + 
-                                "<span class='innerhtml' style='color:#ff0000; font-size: 15px;'> ბოიკოტი"  + "</span>" +
+                                //"<span class='innerhtml' style='color:#666666; font-size: 15px;'>2025" + 
+                                //"<span class='innerhtml' style='color:#ff0000; font-size: 15px;'> ბოიკოტი"  + "</span>" +
                                 "</span>" +
                             "</span>" +
                             
@@ -370,8 +370,8 @@ function generateIsochrone(lngLat) {
                             "<span>" +
                                 "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2024" + 
                                 "<span class='innerhtml' style='color:#969696; font-size: 15px;'> " + unm5 + " (" + unm5Percentage + " %)</span><br>" +
-                                "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2025" + 
-                                "<span class='innerhtml' style='color:#ff0000; font-size: 15px;'> ბოიკოტი"  + "</span>" +
+                                //"<span class='innerhtml' style='color:#666666; font-size: 15px;'>2025" + 
+                                //"<span class='innerhtml' style='color:#ff0000; font-size: 15px;'> ბოიკოტი"  + "</span>" +
                                 "</span>" +
                             "</span>" +
                             "</p>" +
