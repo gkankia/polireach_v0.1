@@ -104,9 +104,9 @@ function generateIsochrone(lngLat) {
         map.fitBounds(bbox, {
 
             bearing: 0,
-            pitch: 5,
+            pitch: 52,
             maxZoom: 22, // Ensure enough zoom to show buildings
-            minZoom: 16.5  // Optional: prevent zooming out too much 
+            minZoom: 17  // Optional: prevent zooming out too much 
         });
 
         // Adjust padding as needed
