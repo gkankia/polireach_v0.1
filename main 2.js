@@ -430,7 +430,6 @@ function generateIsochrone(lngLat) {
                     }
                         });
 
-
                     // Fetch relative wealth index data                
                     fetch('https://raw.githubusercontent.com/axis-Z/urbanyxv1/main/data/relative_wealth_georgia.geojson')
                     .then(function(response) {
@@ -618,8 +617,6 @@ function generateIsochrone(lngLat) {
                             },        
                         });
                 });
-
-                
                     
                     document.addEventListener("DOMContentLoaded", function () {
                                         
