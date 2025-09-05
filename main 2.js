@@ -320,7 +320,7 @@ function generateIsochrone(lngLat) {
                             
                             // ქოცების დედისტყვნა
                             "<p style='display: flex; align-items: center; gap: 5px;'>" +
-                            "<img class='img-text' src='/Users/giorgikankia/Documents/GitHub/PoliReach/img/ქოცნება.png' alt='lelo' style='width: 25%; height: auto;'>" +
+                            "<img class='img-text' src='https://raw.githubusercontent.com/axis-Z/urbanyxv1/main/img/ქოცნება.png' alt='lelo' style='width: 25%; height: auto;'>" +
                             "<span>" +
                                 "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2024" + 
                                 "<span class='innerhtml' style='color:#969696; font-size: 15px;'> " + qocebi41 + " (" + qocebi41Percentage + " %)</span><br>" +
@@ -329,7 +329,7 @@ function generateIsochrone(lngLat) {
 
                             // კოალიცია ცვლილებებისთვის - გვარამია, ჯაფარიძე, დროა, ნიკა მელია
                             "<p style='display: flex; align-items: center; gap: 5px;'>" +
-                            "<img class='img-text' src='/Users/giorgikankia/Documents/GitHub/PoliReach/img/კოალიცია.png' alt='lelo' style='width: 25%; height: auto;'>" +
+                            "<img class='img-text' src='https://raw.githubusercontent.com/axis-Z/urbanyxv1/main/img/კოალიცია.png' alt='lelo' style='width: 25%; height: auto;'>" +
                             "<span>" +
                                 "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2024" + 
                                 "<span class='innerhtml' style='color:#969696; font-size: 15px;'> " + koalicia4 + " (" + koalicia4Percentage + " %)</span><br>" +
@@ -341,7 +341,7 @@ function generateIsochrone(lngLat) {
                             // ყლელო
                             "</p>" +
                             "<p style='display: flex; align-items: center; gap: 5px;'>" +
-                            "<img class='img-text' src='/Users/giorgikankia/Documents/GitHub/PoliReach/img/ყლელო.png' alt='lelo' style='width: 25%; height: auto;'>" +
+                            "<img class='img-text' src='https://raw.githubusercontent.com/axis-Z/urbanyxv1/main/img/ყლელო.png' alt='lelo' style='width: 25%; height: auto;'>" +
                             "<span>" +
                                 "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2024" + 
                                 "<span class='innerhtml' style='color:#969696; font-size: 15px;'> " + lelo9 + " (" + lelo9Percentage + " %)</span><br>" +
@@ -354,7 +354,7 @@ function generateIsochrone(lngLat) {
 
                             // თვალთხარია
                             "<p style='display: flex; align-items: center; gap: 5px;'>" +
-                            "<img class='img-text' src='/Users/giorgikankia/Documents/GitHub/PoliReach/img/თვალთხარია.png' alt='lelo' style='width: 25%; height: auto;'>" +
+                            "<img class='img-text' src='https://raw.githubusercontent.com/axis-Z/urbanyxv1/main/img/თვალთხარია.png' alt='lelo' style='width: 25%; height: auto;'>" +
                             "<span>" +
                                 "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2024" + 
                                 "<span class='innerhtml' style='color:#969696; font-size: 15px;'> " + gakharia25 + " (" + gakharia25Percentage + " %)</span><br>" +
@@ -367,7 +367,7 @@ function generateIsochrone(lngLat) {
 
                             // ენმ
                             "<p style='display: flex; align-items: center; gap: 5px;'>" +
-                            "<img class='img-text' src='/Users/giorgikankia/Documents/GitHub/PoliReach/img/ენმ.png' alt='lelo' style='width: 25%; height: auto;'>" +
+                            "<img class='img-text' src='https://raw.githubusercontent.com/axis-Z/urbanyxv1/main/img/ენმ.png' alt='lelo' style='width: 25%; height: auto;'>" +
                             "<span>" +
                                 "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2024" + 
                                 "<span class='innerhtml' style='color:#969696; font-size: 15px;'> " + unm5 + " (" + unm5Percentage + " %)</span><br>" +
@@ -379,7 +379,7 @@ function generateIsochrone(lngLat) {
 
                             // გირჩი 36
                             "<p style='display: flex; align-items: center; gap: 5px;'>" +
-                            "<img class='img-text' src='/Users/giorgikankia/Documents/GitHub/PoliReach/img/გირჩი.png' alt='lelo' style='width: 25%; height: auto;'>" +
+                            "<img class='img-text' src='https://raw.githubusercontent.com/axis-Z/urbanyxv1/main/img/გირჩი.png' alt='lelo' style='width: 25%; height: auto;'>" +
                             "<span>" +
                                 "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2024" + 
                                 "<span class='innerhtml' style='color:#969696; font-size: 15px;'> " + girchi36 + " (" + girchi36Percentage + " %)</span><br>" +
@@ -388,7 +388,7 @@ function generateIsochrone(lngLat) {
 
                             // სხვა პარტიები
                             "<p style='display: flex; align-items: center; gap: 5px;'>" +
-                            "<img class='img-text' src='/Users/giorgikankia/Documents/GitHub/PoliReach/img/სხვა.png' alt='lelo' style='width: 25%; height: auto;'>" +
+                            "<img class='img-text' src='https://raw.githubusercontent.com/axis-Z/urbanyxv1/main/img/სხვა.png' alt='lelo' style='width: 25%; height: auto;'>" +
                             "<span>" +
                                 "<span class='innerhtml' style='color:#666666; font-size: 15px;'>2024" + 
                                 "<span class='innerhtml' style='color:#969696; font-size: 15px;'> " + otherparties + " (" + otherpartiesPercentage + " %)</span><br>" +
