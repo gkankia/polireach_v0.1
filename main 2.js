@@ -574,10 +574,21 @@ function generateIsochrone(lngLat) {
 
                                         // Update legend title
                                         var legendTitle = document.getElementById("legend-title");
-                                        legendTitle.innerHTML = "<p><strong><span class='innerhtml' style='color: yellow; background-color: black; padding: 2px 4px; border-radius: 3px;'>" 
-                                            + totalCount + "</span></strong> საარჩევნო უბანი <strong><span class='innerhtml' style='color: yellow; background-color: black; padding: 2px 4px; border-radius: 3px;'>"
-                                            + contours_minutes + "-წუთიან " + profileGeoLabel + "</span></strong> სავალ მანძილზე" + "<br>" + "<span class='innerhtml' style='color: white; background-color: ${legendBgColor}; padding: 2px 4px; border-radius: 3px;'>" 
-                                            + legendMessage + "</span></p>";
+                                        legendTitle.innerHTML = `<p>
+                                            <strong>
+                                                <span class='innerhtml' style='color: yellow; background-color: black; padding: 2px 4px; border-radius: 3px;'>
+                                                    ${totalCount}</span>
+                                            </strong> საარჩევნო უბანი 
+                                            <strong>
+                                                <span class='innerhtml' style='color: yellow; background-color: black; padding: 2px 4px; border-radius: 3px;'>
+                                                    ${contours_minutes}-წუთიან ${profileGeoLabel}</span>
+                                            </strong>სავალ მანძილზე
+                                            <br>
+                                            <br>
+                                            <span class='innerhtml' style='color: white; font-size: 32px; background-color: ${legendBgColor}; padding: 4px 6px; border-radius: 6px;'>
+                                                ${legendMessage}
+                                            </span>
+                                        </p>`;
                                     }
                                 
                                     // Clear and show the legend container
