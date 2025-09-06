@@ -18,7 +18,7 @@ map.addControl(new mapboxgl.NavigationControl());
     
 // Add a scale control to the map   
 map.addControl(new mapboxgl.ScaleControl());
-     
+
 // Get all fly buttons      
 const flyButtons = document.querySelectorAll('.fly-button');
     
@@ -46,23 +46,41 @@ dataSourceSelect.addEventListener("change", function () {
 });
         
 var marker;
-map.on("click", function (e) {
-       
-    // Get the clicked coordinates             
-    var lngLat = e.lngLat;
-    
-    // Remove existing marker if any            
+
+// Function to handle a new location (clicked or geolocated)
+function handleLocation(lngLat) {
+    // Remove existing marker if any
     if (marker) {
-        marker.remove();               
+        marker.remove();
     }
-                    
-    // Add marker at clicked location with custom color                     
+
+    // Add a new marker
     marker = new mapboxgl.Marker({
-        color: "#fb8072" // Specify the color in hexadecimal format
+        color: "#fb8072"
     }).setLngLat(lngLat).addTo(map);
-        
-    // Call function to generate isochrone
+
+    // Generate the isochrone at the given coordinates
     generateIsochrone(lngLat);
+}
+
+// Click on the map
+map.on("click", function(e) {
+    handleLocation(e.lngLat);
+});
+
+// Geolocate control
+var geolocateControl = new mapboxgl.GeolocateControl({
+    positionOptions: { enableHighAccuracy: true },
+    trackUserLocation: true,
+    showUserHeading: true
+});
+
+map.addControl(geolocateControl);
+
+// Trigger isochrone when device is located
+geolocateControl.on('geolocate', function(e) {
+    var lngLat = [e.coords.longitude, e.coords.latitude];
+    handleLocation(lngLat);
 });
 
 function generateIsochrone(lngLat) {
@@ -553,49 +571,75 @@ function generateIsochrone(lngLat) {
                                         var qocebi41 = pointsWithinIsochrone.features.reduce((acc, f) => acc + f.properties.QOC_VOTES, 0);
                                         var lelo9est = pointsWithinIsochrone.features.reduce((acc, f) => acc + f.properties.TOT_2_LEL, 0);
                                         var gakharia25est = pointsWithinIsochrone.features.reduce((acc, f) => acc + f.properties.GAKH_2_GAk, 0);
-
-                                        // Decide legend title based on vote comparison
+                                    
+                                        // Compute combined opposition
+                                        var oppositionTotal = lelo9est + gakharia25est;
+                                    
+                                        // Initialize legend variables
                                         var legendMessage = "";
                                         var legendBgColor = "";
                                         var ratioText = "";
                                         var ratioTextBG = "";
-
-                                        // If GD has more votes than Lelo + Gakharia
-                                        if (qocebi41 > (lelo9est + gakharia25est)) {
-                                            var ratio = (qocebi41 / (lelo9est + gakharia25est)).toFixed(1); // calculate ratio
-                                            legendMessage = "ასე რომ, ნწუ... ვერ გამოგლეჯ!";
-                                            legendBgColor = "rgba(255, 0, 0, 0.5)"; // red, semi-transparent
-                                            ratioText = ` ქოცებს ${ratio}-ჯერ მეტი მხარდაჭერა აქვთ`;
-                                            ratioTextBG = "rgba(4, 42, 169, 0.5)"; // green, semi-transparent
-                                        // If Lelo + Gakharia votes are >= GD votes and at least one of them has votes
-                                        } else if ((lelo9est + gakharia25est) >= qocebi41 && (lelo9est + gakharia25est + qocebi41) > 0) {
-                                            var ratio = ((lelo9est + gakharia25est) / qocebi41).toFixed(1);
-                                            legendMessage = "რაღაცის ფაფხური შეიძლება, მაგრამ აზრი მაინც არ აქვს";
-                                            legendBgColor = "rgba(0, 128, 0, 0.5)"; // green, semi-transparent
-                                            ratioText = ` 9 + 25 ${ratio}-ჯერ მეტი მხარდაჭერა აქვს`;
-                                        // Otherwise (all zeros or missing data)
-                                        } else {
+                                    
+                                        // Decide legend title based on vote comparison
+                                        if (qocebi41 === 0 && oppositionTotal === 0) {
+                                            // Insufficient data — display only the warning
                                             legendMessage = "არასაკმარისი მონაცემები";
-                                            legendBgColor = "rgba(255, 165, 0, 0.5)"; // orange, semi-transparent
+                                            legendBgColor = "rgba(255, 234, 2, 0.5)"; // orange
+                                            ratioText = "";
+                                            ratioTextBG = "";
+                                        } else if (qocebi41 > oppositionTotal) {
+                                            // GD stronger
+                                            var ratio = oppositionTotal > 0 ? (qocebi41 / oppositionTotal).toFixed(1) : "—";
+                                            legendMessage = "ნწუ... ვერ გამოგლეჯ!";
+                                            legendBgColor = "rgba(255, 0, 0, 0.5)"; // red
+                                            ratioText = `ქოცებს ${ratio}-ჯერ მეტი`;
+                                            ratioTextBG = "rgba(12, 5, 227, 0.45)";
+                                        } else {
+                                            // Opposition stronger or equal
+                                            var ratio = qocebi41 > 0 ? (oppositionTotal / qocebi41).toFixed(1) : "—";
+                                            legendMessage = "რაღაცის ფაფხური შეიძლება, მაგრამ დიდად, ალბათ, აზრი მაინც არ აქვს";
+                                            legendBgColor = "rgba(0, 128, 0, 0.5)"; // green
+                                            ratioText = `9 + 25 ${ratio}-ჯერ`;
+                                            ratioTextBG = "rgba(0, 0, 0, 0.45)";
                                         }
-
+                                    
                                         // Update legend title
                                         var legendTitle = document.getElementById("legend-title");
-                                        legendTitle.innerHTML = `<p>
-                                            <strong>
-                                                <span class='innerhtml' style='color: yellow; background-color: black; padding: 2px 4px; border-radius: 3px;'>
-                                                    ${totalCount}</span>
-                                            </strong> საარჩევნო უბანი 
-                                            <strong>
-                                                <span class='innerhtml' style='color: yellow; background-color: black; padding: 2px 4px; border-radius: 3px;'>
-                                                    ${contours_minutes}-წუთიან ${profileGeoLabel}</span>
-                                            </strong>სავალ მანძილზე
-                                            <br></p>
-                                            <p><span class='innerhtml' style='color: white; font-size: 32px; background-color: ${ratioTextBG}; padding: 4px 6px; border-radius: 6px;'>${ratioText} </p>
-                                            <p><span class='innerhtml' style='color: white; font-size: 25px; background-color: ${legendBgColor}; padding: 3px 5px; border-radius: 4px;'>
-                                                ${legendMessage}
-                                            </span></p>
-                                        </p>`;
+                                    
+                                        if (legendMessage === "არასაკმარისი მონაცემები") {
+                                            // Only display the insufficient data message
+                                            legendTitle.innerHTML = `
+                                                <p>
+                                                    <span class='innerhtml' style='color: white; font-size: 25px; background-color: ${legendBgColor}; padding: 4px 6px; border-radius: 6px;'>
+                                                        ${legendMessage}
+                                                    </span>
+                                                </p>
+                                            `;
+                                        } else {
+                                            // Display full legend with ratio
+                                            legendTitle.innerHTML = `
+                                                <p>
+                                                    <strong>
+                                                        <span class='innerhtml' style='color: yellow; background-color: black; padding: 2px 4px; border-radius: 3px;'>
+                                                            ${contours_minutes}-წუთიან ${profileGeoLabel}</span></strong> სავალ მანძილზე
+                                                    <strong>
+                                                        <span class='innerhtml' style='color: yellow; background-color: black; padding: 2px 4px; border-radius: 3px;'>
+                                                            ${totalCount}</span></strong> საარჩევნო უბანია,
+                                                </p>
+                                                <p>
+                                                    სადაც, ჯამში, 
+                                                    <strong><span class='innerhtml' style='color: white; font-size: 25px; background-color: ${ratioTextBG}; padding: 4px 6px; border-radius: 6px;'>
+                                                        ${ratioText}</span></strong> მხარდაჭერა აქვთ.
+                                                </p>
+                                                <p>
+                                                    ასე რომ,
+                                                    <strong><span class='innerhtml' style='color: white; font-size: 25px; background-color: ${legendBgColor}; padding: 3px 5px; border-radius: 4px;'>
+                                                        ${legendMessage}
+                                                    </span></strong>
+                                                </p>
+                                            `;
+                                        }
                                     }
                                 
                                     // Clear and show the legend container
