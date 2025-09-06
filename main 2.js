@@ -399,7 +399,7 @@ function generateIsochrone(lngLat) {
                         // Data source for the pie chart including percentages
                         var genderData = [ 
                             { x: 'ქალს ქალი ჰქვია', y: womenSum, text: + womenSum + ' (' + womenPercentage + '%)',  fill: '#fdb462'  },
-                            { x: 'და კაცს კაცი', y: menSum, text: + menSum + ' (' + menPercentage + '%)', fill: '#8dd3c7' }
+                            { x: 'კაცს კაცი', y: menSum, text: + menSum + ' (' + menPercentage + '%)', fill: '#8dd3c7' }
                         ];
 
                         var genderPieChart = new ej.charts.AccumulationChart({
@@ -551,21 +551,28 @@ function generateIsochrone(lngLat) {
 
                                         // Dynamically calculate party totals inside this scope
                                         var qocebi41 = pointsWithinIsochrone.features.reduce((acc, f) => acc + f.properties.QOC_VOTES, 0);
-                                        var lelo9est = pointsWithinIsochrone.features.reduce((acc, f) => acc + f.properties.LELO_2_LEL, 0);
+                                        var lelo9est = pointsWithinIsochrone.features.reduce((acc, f) => acc + f.properties.TOT_2_LEL, 0);
                                         var gakharia25est = pointsWithinIsochrone.features.reduce((acc, f) => acc + f.properties.GAKH_2_GAk, 0);
 
                                         // Decide legend title based on vote comparison
                                         var legendMessage = "";
                                         var legendBgColor = "";
+                                        var ratioText = "";
+                                        var ratioTextBG = "";
 
                                         // If GD has more votes than Lelo + Gakharia
                                         if (qocebi41 > (lelo9est + gakharia25est)) {
-                                            legendMessage = "ნწუ, ვერ გამოგლეჯ!";
+                                            var ratio = (qocebi41 / (lelo9est + gakharia25est)).toFixed(1); // calculate ratio
+                                            legendMessage = "ასე რომ, ნწუ... ვერ გამოგლეჯ!";
                                             legendBgColor = "rgba(255, 0, 0, 0.5)"; // red, semi-transparent
+                                            ratioText = ` ქოცებს ${ratio}-ჯერ მეტი მხარდაჭერა აქვთ`;
+                                            ratioTextBG = "rgba(4, 42, 169, 0.5)"; // green, semi-transparent
                                         // If Lelo + Gakharia votes are >= GD votes and at least one of them has votes
                                         } else if ((lelo9est + gakharia25est) >= qocebi41 && (lelo9est + gakharia25est + qocebi41) > 0) {
-                                            legendMessage = "რაღაცის ფაფური შეიძლება, მაგრამ აზრი მაინც არ აქვს";
+                                            var ratio = ((lelo9est + gakharia25est) / qocebi41).toFixed(1);
+                                            legendMessage = "რაღაცის ფაფხური შეიძლება, მაგრამ აზრი მაინც არ აქვს";
                                             legendBgColor = "rgba(0, 128, 0, 0.5)"; // green, semi-transparent
+                                            ratioText = ` 9 + 25 ${ratio}-ჯერ მეტი მხარდაჭერა აქვს`;
                                         // Otherwise (all zeros or missing data)
                                         } else {
                                             legendMessage = "არასაკმარისი მონაცემები";
@@ -583,11 +590,11 @@ function generateIsochrone(lngLat) {
                                                 <span class='innerhtml' style='color: yellow; background-color: black; padding: 2px 4px; border-radius: 3px;'>
                                                     ${contours_minutes}-წუთიან ${profileGeoLabel}</span>
                                             </strong>სავალ მანძილზე
-                                            <br>
-                                            <br>
-                                            <span class='innerhtml' style='color: white; font-size: 32px; background-color: ${legendBgColor}; padding: 4px 6px; border-radius: 6px;'>
+                                            <br></p>
+                                            <p><span class='innerhtml' style='color: white; font-size: 32px; background-color: ${ratioTextBG}; padding: 4px 6px; border-radius: 6px;'>${ratioText} </p>
+                                            <p><span class='innerhtml' style='color: white; font-size: 25px; background-color: ${legendBgColor}; padding: 3px 5px; border-radius: 4px;'>
                                                 ${legendMessage}
-                                            </span>
+                                            </span></p>
                                         </p>`;
                                     }
                                 
