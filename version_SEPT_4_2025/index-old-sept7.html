@@ -93,38 +93,15 @@ p.beta {
     padding: 0;
 }
 
-.how-to-toggle {
-    width: 100%;
-    background-color: #ffffff;
-    border: none;
-    text-align: left;
-    padding: 20px;
+.how-to {
     font-family: JetBrains Mono, monospace;
-    font-weight: 600;
-    font-size: 20px;
-    cursor: pointer;
-}
-
-.how-to-toggle:focus {
-    outline: none;
-}
-
-.how-to-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.how-to-content.show {
-    max-height: 500px; /* enough for all content */
+    margin: 20px;
 }
 
 .about-container {
     display: flex;
     align-items: center;
-    margin: 10px 0 10px 0;
-    padding: 10px;
-    font-family: JetBrains Mono, monospace;
+    margin-bottom: 0;
     font-size: 14px;
 }
 
@@ -135,29 +112,25 @@ p.beta {
 
 /* The page is split between map and sidebar - the sidebar gets 1/3, map
 gets 2/3 of the page. You can adjust this to your personal liking. */
-/* Container holds map + sidebar */
-.map-sidebar-container {
-    display: flex;
-    flex-direction: row; /* desktop: sidebar left, map right */
-    height: 100vh;
-}
-
-/* Desktop map */
-.map {
-    width: 75%;
-    height: 100%;
-    position: relative;
-}
-
-/* Desktop sidebar */
 .sidebar {
+    position: absolute;
     width: 25%;
     height: 100%;
-    overflow-y: auto;
-    background-color: rgba(255,255,255,0.9);
-    border-left: 1px solid rgba(0,0,0,0.25);
-    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.9);
+    /*border-right: 1px solid rgba(0, 0, 0, 0.25);*/
+    overflow-y: auto; /* Enable vertical scrolling if needed */
     z-index: 1;
+}
+
+.map {
+    position: absolute;
+    left: 25%;
+    width: 75%;
+    height: 100%;
+    top: 0;  
 }
 
 .heading {
@@ -476,151 +449,116 @@ option  {
 
 /* Add a media query for screens smaller than 768px (tablets and mobile) */
 @media only screen and (max-width: 768px) {
-    .map-sidebar-container {
-        flex-direction: column;
+    .map, .sidebar {
+        position: absolute;
+        width: 100%;
     }
 
     .map {
-        width: 100%;
-        height: 60vh; /* map takes 70% of viewport height */
+        height: 70vh; /* 70% of viewport height */
     }
 
     .sidebar {
-        padding-top: 60px;
-        width: 100%;
-        height: 40vh; /* sidebar below map */
-        border-left: none;
+        position: absolute;
+        height: 30vh; /* 30% of viewport height */
         border-top: 1px solid rgba(0,0,0,0.25);
-    }
-
-    .about-container {
-        display: flex;
-        align-items: center;
-        margin: 2px 0;
-        padding: 2px;
-        font-family: JetBrains Mono, monospace;
-        font-size: 14px;
-    }
-
-    /* Heading horizontal and below the map */
-    .heading {
-        position: fixed; /* stay on bottom */
-        display: flex;
+        overflow-y: auto;
         bottom: 0;
-        left: 0;
-        width: 100%;
-        flex-direction: row; /* horizontal layout */
-        justify-content: flex-start; /* h1 left, beta right */
-        align-items: center;
-        background-color: rgba(55, 56, 56, 0.95); /* semi-transparent if over map */
-        padding: 10px;
-        gap: 20px; /* adjust spacing between h1 and beta */
-        z-index: 1000; /* above everything */
     }
-
-    .heading h1 {
-        writing-mode: horizontal-tb; /* normal horizontal text */
-        transform: none; /* remove rotation */
-        font-size: 30px; /* adjust as needed */
-        margin: 0;
-    }
-
-    .heading p.beta {
-        font-size: 12px; /* adjust as needed */
-        margin-left: auto; /* pushes it to the right, leaving gap as buffer */
-        text-align: left;
-    }
-
-    #legend-title {
-        font-size: 14px;  /* smaller on mobile */
-        padding: 2px 4px; /* optional, adjust padding too */
-        text-align: left;
-    }
-  
 }
 
 </style>
 <head>   
-    <body>
-        <div class="heading">
-            <p class="beta">v0.1 [beta]</p>
+    <body>         
+        <div class='sidebar'>          
+            <div class="how-to">
+                <h2 class="about" style="font-size: 18px;">როგორ მუშაობს?</h2>
+                <div class="about-container">
+                    <div class="symbol"><span class="material-symbols-outlined">
+                        pin_drop</span>    
+                    </div>
+                    <div class="text">დააკლიკე რუკაზე ან ადგილის ავტომატურად მონიშვნის ღილაკს</div>
+                </div>
+                <div class="about-container">
+                    <div class="symbol"><span class="material-symbols-outlined">
+                        schedule</span>
+                    </div>
+                    <div class="text">აირჩიე გადაადგილების დრო</div>
+                </div>
+                <div class="about-container">
+                    <div class="symbol"><span class="material-symbols-outlined">
+                        route</span>
+                    </div>
+                    <div class="text">აირჩიე გადაადგილების ფორმა</div>
+                </div>
+                <!--<div class="about-container">
+                    <div class="symbol"><span class="material-symbols-outlined">    
+                        travel_explore</span>
+                    </div>
+                    <div class="text">მიიღე სრული ინფორმაცია</div>
+                </div>-->
+            </div>
+            
+            <div class="main-container">
+                <form id="params">   
+                    <div>
+                        <h4 id="contours" class="txt-m txt-bold mb6" style="font-size: 14px;">გადაადგილების დრო (წთ)</h4>
+                        <select id="contours_minutes">
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="25">25</option>
+                        </select>
+                    </div> 
+                    <h4 class="travel-mode">გადაადგილების ფორმა</h4>
+                    <div class="toggle-group">
+                        <label class="toggle-container">
+                            <input name="profile" type="radio" value="walking" />
+                            <div class="toggle toggle--active-null toggle--null">ფეხით<br><span class="material-symbols-outlined">footprint</span></div>
+                        </label>
+                        <label class="toggle-container">
+                            <input name="profile" type="radio" value="cycling" />
+                            <div class="toggle toggle--active-null toggle--null">ველო<br><span class="material-symbols-outlined">directions_bike</span></div>
+                        </label>
+                    </div>
+                    <br>
+                    <div>
+                        <h4 id="data-source" style="font-size: 14px;">მონაცემთა წყარო</h4>
+                        <select id="data_source">
+                            <option value="voters">არჩევნები-24</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="intro">
+                <div id="pielegend" class="pielegend">
+                    <div id="genderPieChart"></div>         
+                </div>
+                <div id="legend" class="legend"></div>
+                
+            </div>
+
+            <!--<div id="sidebar-content"></div> 
+            <div id="note">
+                <p class="note">შენიშვნა: სრული ფუნქციონალისთვის, გამოიყენეთ დესკტოპ ვერსია</p>
+            </div>-->    
+        </div>
+        <div class="heading"><p class="beta">v0.1 [beta]</p>
             <h1>გამოგლეჯაMAP</h1>
-        </div>
-    
-        <div class="map-sidebar-container">
-            <!-- Sidebar stays on the left -->
-            <div class="sidebar">
-                <div class="how-to">
-                    <button class="how-to-toggle">როგორ მუშაობს? ▼</button>
-                    <div class="how-to-content">
-                        <div class="about-container">
-                            <div class="symbol"><span class="material-symbols-outlined">pin_drop</span></div>
-                            <div class="text">დააკლიკე რუკაზე ან ადგილის ავტომატურად მონიშვნის ღილაკს</div>
-                        </div>
-                        <div class="about-container">
-                            <div class="symbol"><span class="material-symbols-outlined">schedule</span></div>
-                            <div class="text">აირჩიე გადაადგილების დრო</div>
-                        </div>
-                        <div class="about-container">
-                            <div class="symbol"><span class="material-symbols-outlined">route</span></div>
-                            <div class="text">აირჩიე გადაადგილების ფორმა</div>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="main-container">
-                    <form id="params">
-                        <div>
-                            <h4 id="contours">გადაადგილების დრო (წთ)</h4>
-                            <select id="contours_minutes">
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="25">25</option>
-                            </select>
-                        </div>
-                        <h4 class="travel-mode">გადაადგილების ფორმა</h4>
-                        <div class="toggle-group">
-                            <label class="toggle-container">
-                                <input name="profile" type="radio" value="walking" />
-                                <div class="toggle toggle--active-null toggle--null">ფეხით<br><span class="material-symbols-outlined">footprint</span></div>
-                            </label>
-                            <label class="toggle-container">
-                                <input name="profile" type="radio" value="cycling" />
-                                <div class="toggle toggle--active-null toggle--null">ველო<br><span class="material-symbols-outlined">directions_bike</span></div>
-                            </label>
-                        </div>
-                        <div>
-                            <h4 id="data-source">მონაცემთა წყარო</h4>
-                            <select id="data_source">
-                                <option value="voters">არჩევნები-24</option>
-                            </select>
-                        </div>
-                    </form>
-                </div>
-    
-                <!-- Keep legends inside sidebar -->
-                <div class="intro">
-                    <div id="pielegend" class="pielegend">
-                        <div id="genderPieChart"></div>
-                    </div>
-                    <div id="legend" class="legend"></div>
-                </div>
-            </div>
-    
-            <!-- Map stays on the right -->
-            <div id="map" class="map">
-                <!--<div class="fly-buttons-container"></div>-->
-                <div id="legend-title"></div>
-            </div>
-        </div>
-    
+        </div>       
         <footer>
-            <div class="zaxis">
-                <a href="https://zaxis.ge"><img src="https://raw.githubusercontent.com/axis-Z/urbanyxv1/refs/heads/main/img/white-transparent-background.png" alt="" width="75"></a>
+            <p class="footer">
+                <div class="zaxis"><a href="https://zaxis.ge"><img src="https://raw.githubusercontent.com/axis-Z/urbanyxv1/refs/heads/main/img/white-transparent-background.png" alt="" width="75"></a></div>
+            </footer>
+            <div id="map" class="map">
+                <div class="fly-buttons-container">
+                </div>
+                <div id="legend" class="legend"></div>
+                <div id="legend-title"></div>
+                
             </div>
-        </footer>
-    
+        </div>
         <script src="./main 2.js"></script>
-    </body>
+    
+</body>
 </head> 
 </html>

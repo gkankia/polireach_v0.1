@@ -629,12 +629,12 @@ function generateIsochrone(lngLat) {
                                                 </p>
                                                 <p>
                                                     სადაც, ჯამში, 
-                                                    <strong><span class='innerhtml' style='color: white; font-size: 25px; background-color: ${ratioTextBG}; padding: 4px 6px; border-radius: 6px;'>
+                                                    <strong><span class='innerhtml' style='color: white; background-color: ${ratioTextBG}; padding: 4px 6px; border-radius: 6px;'>
                                                         ${ratioText}</span></strong> მხარდაჭერა აქვთ.
                                                 </p>
                                                 <p>
                                                     ასე რომ,
-                                                    <strong><span class='innerhtml' style='color: white; font-size: 25px; background-color: ${legendBgColor}; padding: 3px 5px; border-radius: 4px;'>
+                                                    <strong><span class='innerhtml' style='color: white; background-color: ${legendBgColor}; padding: 3px 5px; border-radius: 4px;'>
                                                         ${legendMessage}
                                                     </span></strong>
                                                 </p>
@@ -751,3 +751,17 @@ function generateIsochrone(lngLat) {
                         var feature = e.features[0];
                         console.log('Clicked feature properties:', feature.properties);
                     })
+
+                    document.querySelectorAll('.how-to-toggle').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const content = button.nextElementSibling;
+                            content.classList.toggle('show');
+                    
+                            // Change arrow direction
+                            if (content.classList.contains('show')) {
+                                button.textContent = "როგორ მუშაობს? ▲";
+                            } else {
+                                button.textContent = "როგორ მუშაობს? ▼";
+                            }
+                        });
+                    });
