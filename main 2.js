@@ -591,7 +591,7 @@ function generateIsochrone(lngLat) {
                                         } else if (qocebi41 > oppositionTotal) {
                                             // GD stronger
                                             var ratio = oppositionTotal > 0 ? (qocebi41 / oppositionTotal).toFixed(1) : "—";
-                                            legendMessage = "ნწუ... ვერ გამოგლეჯ!";
+                                            legendMessage = "ვერ გამოგლეჯ!";
                                             legendBgColor = "rgba(255, 0, 0, 0.5)"; // red
                                             ratioText = `ქოცებს ${ratio}-ჯერ მეტი`;
                                             ratioTextBG = "rgba(12, 5, 227, 0.45)";
